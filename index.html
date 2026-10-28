@@ -479,7 +479,8 @@
 
   // ============ 玩家 / 敌人 ============
   function createPlayer() {
-    player = new Tank(FIELD_W / 2 - 12, FIELD_H - TILE - 4, DIR.UP, "#7ed957", true);
+    // 基地占据最底部一格，玩家出生在基地正上方的空格，避免自身初始碰撞
+    player = new Tank(FIELD_W / 2 - 12, FIELD_H - TILE * 2 + 4, DIR.UP, "#7ed957", true);
     playerAlive = true;
   }
 
@@ -488,7 +489,7 @@
     // 出生点若被占则等待
     if (!player) return;
     player.x = FIELD_W / 2 - 12;
-    player.y = FIELD_H - TILE - 4;
+    player.y = FIELD_H - TILE * 2 + 4;
     player.dir = DIR.UP;
     player.alive = true;
     player.flashTimer = 2.0;
@@ -521,9 +522,9 @@
   function startLevel() {
     loadLevel(LEVELS[level]);
     bullets = []; enemies = []; powerups = [];
-    player = player || new Tank(FIELD_W / 2 - 12, FIELD_H - TILE - 4, DIR.UP, "#7ed957", true);
+    player = player || new Tank(FIELD_W / 2 - 12, FIELD_H - TILE * 2 + 4, DIR.UP, "#7ed957", true);
     player.x = FIELD_W / 2 - 12;
-    player.y = FIELD_H - TILE - 4;
+    player.y = FIELD_H - TILE * 2 + 4;
     player.dir = DIR.UP;
     player.alive = true; player.star = false; player.cooldown = 0;
     player.flashTimer = 2.0;
